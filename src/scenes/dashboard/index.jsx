@@ -7,6 +7,7 @@ import SensorsIcon from '@mui/icons-material/Sensors';
 import LineChart from "../../components/LineChart";
 import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
+import SensorsTableMock from "../../components/SensorsTableMock";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -113,20 +114,20 @@ const Dashboard = () => {
           gridColumn="6/13"
           gridRow="4/6"
           backgroundColor={colors.primary[400]}
+          display="flex"
+          flexDirection="column"
+          alignItems="flex-start"
+          justifyContent="flex-start"
+          p={2}
         >
-           <StatBox
-            title={
-                <Box display="flex" alignItems="center" gap={1} mt={3}>
+           <StatBox/>
+            <Box display="flex" alignItems="center" gap={1}>
                 <SensorsIcon sx={{ color: colors.greenAccent[600], fontSize: 26 }} />
                 <Typography variant="h5" fontWeight={700}>Sensors</Typography>
-                </Box>
-            }
-            />
-            <Box 
-                height="280px" 
-                m="-20px 0 0 0"
-            >
-                <BarChart isDashboard={true} />
+            </Box>
+            {/* data table mock */}
+            <Box mt={1} height={280} width="100%" sx={{ overflow: "auto" }}>
+                <SensorsTableMock intervalMs={1000} maxRows={100} /> {/* fake data from SensorTableMock */}
             </Box>
         </Box>
     </Box>
