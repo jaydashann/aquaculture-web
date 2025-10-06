@@ -61,7 +61,6 @@ const Dashboard = () => {
         </Box>
 
         <Box height="250px" m="-20px 0 0 0">
-          {/* ⬇️ make sure to pass the data */}
           <LineChart isDashboard data={lineSeries} />
         </Box>
       </Box>
@@ -120,7 +119,7 @@ const Dashboard = () => {
 
       {/* ROW 3: Sensors table */}
       <Box
-        gridColumn="6/13"
+        gridColumn="span 12"
         gridRow="4/6"
         backgroundColor={colors.primary[400]}
         display="flex"

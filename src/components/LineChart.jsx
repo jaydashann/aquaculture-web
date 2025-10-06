@@ -24,7 +24,7 @@ const LineChart = ({ data, isCustomLineColors = false, isDashboard = false }) =>
       colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }}
       margin={{ top: 50, right: 120, bottom: 50, left: 60 }}  // legend
       xScale={{ type: "time", format: "native", precision: "second", useUTC: false }}
-      xFormat="time:%H:%M:%S"   // how tooltips/labels read your Date
+      xFormat="time:%H:%M:%S %p"   
       yScale={{ type: "linear", min: "auto", max: "auto", stacked: true, reverse: false }}
       yFormat=" >-.2f"
       curve="catmullRom"
@@ -35,8 +35,8 @@ const LineChart = ({ data, isCustomLineColors = false, isDashboard = false }) =>
         tickSize: 0,
         tickPadding: 5,
         tickRotation: 0,
-        format: "%Y-%m-%d %H:%M:%S %p",        // label format on axis
-        tickValues: "every 10 seconds", // fewer ticks; try "every 15 seconds" or 6 (fixed count)
+        format: "%Y-%m-%d %H:%M:%S %p",    
+        tickValues: "every 10 seconds", // fewer ticks
         legend: isDashboard ? undefined : "date & time",
         legendOffset: 36,
         legendPosition: "middle",
