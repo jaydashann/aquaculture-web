@@ -12,10 +12,10 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  // Live fake data (newest first)
+  // live fake data (newest first)
   const rows = useMockSensorsStream({ intervalMs: 1000, maxRows: 30 });
 
-  // Transform rows -> Nivo line series (oldest → newest)
+  // transform rows -> Nivo line series (oldest → newest)
   const toLabel = (ms) => new Date(ms).toLocaleTimeString();
   const mkSeries = (id, key, color) => ({
     id,
