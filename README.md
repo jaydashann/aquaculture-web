@@ -23,7 +23,5 @@
 - react-router-dom@6.30.1
 - react-scripts@5.0.1
 - react@19.2.0
-
-
-├── web-vitals@2.1.4
-└── yup@1.7.1
+- web-vitals@2.1.4
+- yup@1.7.1
