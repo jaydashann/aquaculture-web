@@ -16,10 +16,10 @@ const Topbar = () => {
   const colorMode = useContext(ColorModeContext);
   const location = useLocation();
 
-  // Show the Home button only on the notifications route
+  // show home button
   const showHome = location.pathname.startsWith("/notifications");
 
-  // Replace with global store / API for live unread count
+  // replace with global store / API for live unread count
   const unread = useMemo(
     () => mockNotifications.filter((n) => !n.read).length,
     []
@@ -27,12 +27,12 @@ const Topbar = () => {
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
-      {/* Left spacer / could be search later */}
+      {/* spacer */}
       <Box display="flex" backgroundColor={colors.primary[400]} borderRadius="3px" />
 
-      {/* Right icons */}
+      {/* icons */}
       <Box display="flex" alignItems="center" gap={1}>
-        {/* Home button – only visible on Notifications screens */}
+        {/* home button in notification screen */}
         {showHome && (
           <Tooltip title="Home">
             <IconButton

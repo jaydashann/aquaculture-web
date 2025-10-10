@@ -1,4 +1,3 @@
-// src/scenes/notifications/index.jsx
 import { useMemo, useState, useEffect } from "react";
 import {
   Box,
@@ -33,7 +32,7 @@ import { mockNotifications as seed } from "../../data/mockNotifications";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
 
-/* ---------- small helpers ---------- */
+// small helpers
 const SIDEBAR_W = 380;
 const TOPBAR_H = 72;
 const formatDate = (ts) => new Date(ts).toLocaleString();
@@ -56,7 +55,7 @@ const severityIcon = (sev) => {
   }
 };
 
-/* ---------- local state (swap with API/store later) ---------- */
+// local state (swap with API/store later)
 function useNotificationsState() {
   const [items, setItems] = useState(seed);
 
@@ -71,7 +70,7 @@ function useNotificationsState() {
   return { items, setItems, unreadCount, markRead, markAllRead };
 }
 
-/* ---------- left list panel ---------- */
+// left list
 const ListPanel = ({ items, unreadCount }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -93,20 +92,19 @@ const ListPanel = ({ items, unreadCount }) => {
     <Box
       sx={{
         width: SIDEBAR_W,
-        borderRight: `1px solid ${colors.primary[500]}`,
+        borderRight: `2px solid ${theme.palette.divider}`,
         height: `calc(100vh - ${TOPBAR_H}px)`,
         overflow: "auto",
       }}
     >
-      <Box p={2} display="flex" alignItems="center" gap={1}>
+      <Box p={3} display="flex" alignItems="center" gap={1}>
         <Badge badgeContent={unreadCount} color="error">
-          <Typography variant="h5" fontWeight={700}>Notifications</Typography>
+          <Typography variant="h2" fontWeight={700}>Notifications</Typography>
         </Badge>
       </Box>
 
       <Box
         px={2}
-        pb={1}
         display="flex"
         alignItems="center"
         gap={1}
@@ -115,7 +113,7 @@ const ListPanel = ({ items, unreadCount }) => {
         <SearchIcon />
         <InputBase
           fullWidth
-          placeholder="Search notifications…"
+          placeholder="Search notification"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           sx={{ py: 1 }}
@@ -181,7 +179,7 @@ const ListPanel = ({ items, unreadCount }) => {
   );
 };
 
-/* ---------- right detail panel ---------- */
+// right panel
 const DetailPanel = ({ items, markRead }) => {
   const { id } = useParams();
   const theme = useTheme();
@@ -276,17 +274,15 @@ const DetailPanel = ({ items, markRead }) => {
   );
 };
 
-/* ---------- sticky header: Home + Mark all read ---------- */
+// home button
 const NotificationsHeader = ({ onMarkAllRead }) => {
   return (
     <Box
-      px={2}
-      py={1}
       sx={(theme) => ({
         position: "sticky",
         top: 0,
         zIndex: 1,
-        borderBottom: `1px solid ${theme.palette.divider}`,
+        borderBottom: `2px solid ${theme.palette.divider}`,
         background: theme.palette.background.default,
       })}
     >
@@ -314,7 +310,7 @@ const NotificationsHeader = ({ onMarkAllRead }) => {
   );
 };
 
-/* ---------- layout + export ---------- */
+// layout and export
 const NotificationsLayout = ({ state }) => {
   return (
     <Box display="flex" width="100%">
@@ -323,7 +319,7 @@ const NotificationsLayout = ({ state }) => {
         <Route
           path="/"
           element={
-            <Box flex={1} display="grid" placeItems="center">
+            <Box flex={1} display="grid" placeItems="center" sx={{ p: 5 }}>
               <Typography color="text.secondary">
                 Select a notification to view details.
               </Typography>

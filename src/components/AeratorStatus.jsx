@@ -1,5 +1,4 @@
-// src/components/AeratorStatus.jsx
-import { Box, Chip, Typography, Tooltip, useTheme } from "@mui/material";
+import { Box, Chip, Typography, useTheme } from "@mui/material";
 import AutorenewIcon from "@mui/icons-material/Autorenew";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import CircleIcon from "@mui/icons-material/Circle";
@@ -40,7 +39,7 @@ export default function AeratorStatus({ active = true, since = null, note = "" }
         border: `1px solid ${colors.primary[500]}`,
       }}
     >
-      {/* Icon + glow */}
+      {/* icon */}
       <Box
         sx={{
           ...pulse,
@@ -71,10 +70,10 @@ export default function AeratorStatus({ active = true, since = null, note = "" }
         )}
       </Box>
 
-      {/* Texts */}
+      {/* texts */}
       <Box sx={{ minWidth: 0, flex: 1 }}>
         <Box display="flex" alignItems="center" gap={1} flexWrap="wrap">
-          <Typography variant="h6" fontWeight={800}>
+          <Typography variant="h3" fontWeight={800}>
             Aerator
           </Typography>
           <Chip

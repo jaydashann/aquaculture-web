@@ -1,6 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import AutorenewIcon from "@mui/icons-material/Autorenew";
 import NotificationImportantIcon from "@mui/icons-material/NotificationImportant";
 import SensorsIcon from "@mui/icons-material/Sensors";
 import LineChart from "../../components/LineChart";
@@ -18,7 +17,7 @@ const Dashboard = () => {
   const rows = useMockSensorsStream({ intervalMs: 1000, maxRows: 30 });
 
   // transform rows -> Nivo line series (oldest → newest)
-  const toLabel = (ms) => new Date(ms).toLocaleTimeString();
+  // const toLabel = (ms) => new Date(ms).toLocaleTimeString();
   const mkSeries = (id, key, color) => ({
     id,
     color,
@@ -43,7 +42,7 @@ const Dashboard = () => {
       gap="20px"
       p="0 30px"
     >
-      {/* ROW 1: Line chart fed by live mock data */}
+      {/* ROW 1: line chart with live random data */}
       <Box gridColumn="span 12" gridRow="span 2" backgroundColor={colors.primary[400]}>
         <Box
           mt="25px"
@@ -67,7 +66,7 @@ const Dashboard = () => {
         </Box>
       </Box>
 
-      {/* ROW 2: Aerator status */}
+      {/* ROW 2: aerator status */}
       <Box
         gridColumn="span 5"
         backgroundColor={colors.primary[400]}
@@ -76,13 +75,11 @@ const Dashboard = () => {
         justifyContent="flex-start"
         p="20px"
       >
-        {/* Example: active with a since timestamp */}
+        {/* aerator status */}
         <AeratorStatus active={true} since={Date.now() - 1000 * 60 * 45} />
-        {/* Or show a note instead of since: */}
-        {/* <AeratorStatus active={false} note="Manual stop by operator at 14:32" /> */}
       </Box>
 
-      {/* ROW 2: Notifications */}
+      {/* ROW 2: notifications */}
       <Box
         gridColumn="6/13"
         backgroundColor={colors.primary[400]}
@@ -92,18 +89,18 @@ const Dashboard = () => {
         p="26px 0"
         component={RouterLink}
         to="/notifications"
-        sx={{ textDecoration: "none", borderRadius: 1, ":hover": { opacity: 0.95 } }}
+        sx={{ textDecoration: "none", ":hover": { opacity: 0.95 } }}
       >
         <StatBox
           title={
             <Box>
               <Box display="flex" alignItems="center" gap={1.25}>
-                <NotificationImportantIcon sx={{ color: colors.greenAccent[600], fontSize: 26 }} />
-                <Typography variant="h5" fontWeight={700}>
+                <NotificationImportantIcon sx={{ color: colors.greenAccent[600], fontSize: 30 }} />
+                <Typography variant="h3" fontWeight={700}>
                   Notifications and Alerts
                 </Typography>
               </Box>
-              <Typography variant="subtitle1" sx={{ mt: 1, color: colors.greenAccent[600] }}>
+              <Typography variant="subtitle1" sx={{ mt: 3, color: colors.greenAccent[600] }}>
                 View all
               </Typography>
             </Box>
