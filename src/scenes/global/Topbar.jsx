@@ -1,41 +1,67 @@
-import { Box, IconButton, useTheme } from "@mui/material";
-import { useContext } from "react";
+import { Box, IconButton, useTheme, Badge, Tooltip } from "@mui/material";
+import { useContext, useMemo } from "react";
 import { ColorModeContext, tokens } from "../../theme";
-import InputBase from "@mui/material/InputBase";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import SearchIcon from "@mui/icons-material/Search";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import { Link as RouterLink, useLocation } from "react-router-dom";
+
+// TEMP source for unread count; swap with your store/API later
+import { mockNotifications } from "../../data/mockNotifications";
 
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
+  const location = useLocation();
+
+  // Show the Home button only on the notifications route
+  const showHome = location.pathname.startsWith("/notifications");
+
+  // Replace with global store / API for live unread count
+  const unread = useMemo(
+    () => mockNotifications.filter((n) => !n.read).length,
+    []
+  );
 
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
-      {/* SPACE */}
-      <Box
-        display="flex"
-        backgroundColor={colors.primary[400]}
-        borderRadius="3px"
-      >
-      </Box>
+      {/* Left spacer / could be search later */}
+      <Box display="flex" backgroundColor={colors.primary[400]} borderRadius="3px" />
 
-      {/* ICONS */}
-      <Box display="flex">
-        <IconButton onClick={colorMode.toggleColorMode}>
-          {theme.palette.mode === "dark" ? (
-            <DarkModeOutlinedIcon />
-          ) : (
-            <LightModeOutlinedIcon />
-          )}
+      {/* Right icons */}
+      <Box display="flex" alignItems="center" gap={1}>
+        {/* Home button – only visible on Notifications screens */}
+        {showHome && (
+          <Tooltip title="Home">
+            <IconButton
+              component={RouterLink}
+              to="/"
+              aria-label="Go to Home"
+              size="large"
+            >
+              <HomeOutlinedIcon />
+            </IconButton>
+          </Tooltip>
+        )}
+
+        <IconButton onClick={colorMode.toggleColorMode} aria-label="Toggle theme">
+          {theme.palette.mode === "dark" ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
         </IconButton>
-        <IconButton>
-          <NotificationsOutlinedIcon />
-        </IconButton>
+
+        <Tooltip title="Notifications">
+          <IconButton
+            component={RouterLink}
+            to="/notifications"
+            aria-label="Open notifications"
+            size="large"
+          >
+            <Badge color="error" badgeContent={unread} overlap="circular">
+              <NotificationsOutlinedIcon />
+            </Badge>
+          </IconButton>
+        </Tooltip>
       </Box>
     </Box>
   );

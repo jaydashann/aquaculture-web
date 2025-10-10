@@ -7,6 +7,8 @@ import LineChart from "../../components/LineChart";
 import StatBox from "../../components/StatBox";
 import SensorsTableMock from "../../components/SensorsTableMock";
 import useMockSensorsStream from "../../hooks/useMockSensorsStream";
+import { Link as RouterLink } from "react-router-dom";
+import AeratorStatus from "../../components/AeratorStatus";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -72,23 +74,12 @@ const Dashboard = () => {
         display="flex"
         alignItems="flex-start"
         justifyContent="flex-start"
-        p="26px 0"
+        p="20px"
       >
-        <StatBox
-          title={
-            <Box>
-              <Box display="flex" alignItems="center" gap={1.25}>
-                <AutorenewIcon sx={{ color: colors.greenAccent[600], fontSize: 26 }} />
-                <Typography variant="h5" fontWeight={700}>
-                  Aerator Status
-                </Typography>
-              </Box>
-              <Typography variant="subtitle1" sx={{ mt: 1, color: colors.greenAccent[600] }}>
-                Active
-              </Typography>
-            </Box>
-          }
-        />
+        {/* Example: active with a since timestamp */}
+        <AeratorStatus active={true} since={Date.now() - 1000 * 60 * 45} />
+        {/* Or show a note instead of since: */}
+        {/* <AeratorStatus active={false} note="Manual stop by operator at 14:32" /> */}
       </Box>
 
       {/* ROW 2: Notifications */}
@@ -99,6 +90,9 @@ const Dashboard = () => {
         alignItems="flex-start"
         justifyContent="flex-start"
         p="26px 0"
+        component={RouterLink}
+        to="/notifications"
+        sx={{ textDecoration: "none", borderRadius: 1, ":hover": { opacity: 0.95 } }}
       >
         <StatBox
           title={
@@ -110,7 +104,7 @@ const Dashboard = () => {
                 </Typography>
               </Box>
               <Typography variant="subtitle1" sx={{ mt: 1, color: colors.greenAccent[600] }}>
-                notification/alert
+                View all
               </Typography>
             </Box>
           }
