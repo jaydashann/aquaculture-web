@@ -3,6 +3,7 @@ import {
   TableHead, TableRow, Paper
 } from "@mui/material";
 import useMockSensorsStream from "../hooks/useMockSensorsStream";
+import useFirebaseSensorsStream from "../hooks/useFirebaseSensorsStream";
 
 export default function SensorsTableMock({ intervalMs = 1000, maxRows = 100 }) {
   const rows = useMockSensorsStream({ intervalMs, maxRows }); // newest first
