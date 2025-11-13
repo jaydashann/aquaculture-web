@@ -30,7 +30,7 @@ const Login = () => {
       if (tab === 0) {
         await signIn(email, password);
       } else {
-        await signUp(email, password); // links if currently anonymous
+        await signUp(email, password);
       }
       navigate("/", { replace: true });
     } catch (error) {
@@ -43,7 +43,7 @@ const Login = () => {
   const handleGuest = async () => {
     try {
       setBusy(true);
-      await continueAsGuest(); // Firebase Anonymous Auth
+      await continueAsGuest();
       navigate("/", { replace: true });
     } catch (error) {
       setErr(error.message || "Could not start guest session");
@@ -53,14 +53,47 @@ const Login = () => {
   };
 
   return (
-    <Box display="grid" placeItems="center" minHeight="100vh" p={2}>
-      <Card sx={{ width: 420, maxWidth: "95vw" }}>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        minHeight: "100vh",
+        backgroundColor: "transparent", // keep original look
+        p: 2,
+      }}
+    >
+      <Card
+        sx={{
+          width: "100%",
+          maxWidth: 420,
+          backgroundColor: "black", // your original color
+          borderRadius: 3,
+          boxShadow: 4,
+        }}
+      >
         <CardContent>
-          <Typography variant="h4" fontWeight={800} gutterBottom>
-            Sign In
+          <Typography
+            variant="h2"
+            fontWeight={800}
+            gutterBottom
+            textAlign="center"
+            sx={{ p: 2 }}
+          >
+            Welcome!
           </Typography>
 
-          <Tabs value={tab} onChange={(_, v) => setTab(v)} sx={{ mb: 2 }}>
+          <Tabs
+            value={tab}
+            onChange={(_, v) => setTab(v)}
+            sx={{
+              mb: 2,
+              "& .MuiTab-root": { color: "#858796" },
+              "& .MuiTabs-indicator": { backgroundColor: "#577BC1" },
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             <Tab label="Sign In" />
             <Tab label="Create Account" />
           </Tabs>
@@ -111,18 +144,10 @@ const Login = () => {
             fullWidth
             onClick={handleGuest}
             disabled={busy}
+            color="577BC1"
           >
             Continue as Guest
           </Button>
-
-          <Typography
-            variant="caption"
-            display="block"
-            sx={{ mt: 1.5 }}
-            color="text.secondary"
-          >
-            You can upgrade this guest to a full account later without losing data.
-          </Typography>
         </CardContent>
       </Card>
     </Box>

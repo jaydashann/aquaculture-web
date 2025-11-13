@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "../../firebase";
+import { db } from "../firebase";
 import { ref, onValue, query, limitToLast } from "firebase/database";
 
 export default function useFirebaseSensorsStream({ maxRows = 60 } = {}) {

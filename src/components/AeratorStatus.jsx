@@ -17,83 +17,91 @@ export default function AeratorStatus({ active = true, since = null, note = "" }
 
   const pulse = {
     "@keyframes pulse": {
-      "0%":   { boxShadow: `0 0 0 0 rgba(76, 175, 80, 0.65)` },
-      "70%":  { boxShadow: `0 0 0 10px rgba(76, 175, 80, 0)` },
+      "0%": { boxShadow: `0 0 0 0 rgba(76, 175, 80, 0.65)` },
+      "70%": { boxShadow: `0 0 0 10px rgba(76, 175, 80, 0)` },
       "100%": { boxShadow: `0 0 0 0 rgba(76, 175, 80, 0)` },
     },
   };
 
   const statusColor = active ? "success" : "error";
-  const statusText  = active ? "Active" : "Inactive";
+  const statusText = active ? "Active" : "Inactive";
 
   return (
     <Box
       sx={{
-        display: "flex",
-        alignItems: "center",
-        gap: 2,
-        px: 2,
-        py: 1.5,
-        borderRadius: 2,
-        background: colors.primary[400],
-        border: `1px solid ${colors.primary[500]}`,
+        width: "100%",
+        height: "100%",
+        display: "grid",
+        placeItems: "center",
       }}
     >
-      {/* icon */}
+      {/* Square Card */}
       <Box
         sx={{
-          ...pulse,
-          ...(active && { animation: "pulse 2s infinite" }),
-          borderRadius: "9999px",
-          p: 1.25,
-          background:
-            active
-              ? theme.palette.success.main
-              : theme.palette.error.main,
-          color: theme.palette.getContrastText(
-            active ? theme.palette.success.main : theme.palette.error.main
-          ),
-          display: "grid",
-          placeItems: "center",
+          width: "85%",
+          height: "85%",
+          background: colors.primary[500],
+          borderRadius: "12px",
+          border: `2px solid ${colors.primary[600]}`,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+          p: 2,
+          textAlign: "center",
         }}
       >
-        {active ? (
-          <AutorenewIcon
-            sx={{
-              ...spin,
-              animation: "spin 1.2s linear infinite",
-              fontSize: 24,
-            }}
-          />
-        ) : (
-          <PowerSettingsNewIcon sx={{ fontSize: 24, opacity: 0.9 }} />
-        )}
-      </Box>
-
-      {/* texts */}
-      <Box sx={{ minWidth: 0, flex: 1 }}>
-        <Box display="flex" alignItems="center" gap={1} flexWrap="wrap">
-          <Typography variant="h3" fontWeight={800}>
-            Aerator
-          </Typography>
-          <Chip
-            size="small"
-            color={statusColor}
-            label={statusText}
-            icon={<CircleIcon sx={{ fontSize: 12 }} />}
-            sx={{
-              "& .MuiChip-icon": { color: "inherit", ml: 0.5 },
-              fontWeight: 700,
-            }}
-          />
+        {/* Icon */}
+        <Box
+          sx={{
+            ...pulse,
+            ...(active && { animation: "pulse 2s infinite" }),
+            borderRadius: "50%",
+            padding: 2,
+            background: active 
+              ? theme.palette.success.main 
+              : theme.palette.error.main,
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          {active ? (
+            <AutorenewIcon
+              sx={{
+                ...spin,
+                animation: "spin 1.4s linear infinite",
+                fontSize: 30,
+                color: "white",
+              }}
+            />
+          ) : (
+            <PowerSettingsNewIcon sx={{ fontSize: 36, color: "white" }} />
+          )}
         </Box>
 
+        {/* Label */}
+        <Typography variant="h3" fontWeight={700} color="white">
+          Aerator
+        </Typography>
+
+        {/* Status Chip */}
+        <Chip
+          size="medium"
+          color={statusColor}
+          label={statusText}
+          icon={<CircleIcon sx={{ fontSize: 14 }} />}
+          sx={{
+            "& .MuiChip-icon": { color: "inherit" },
+            fontWeight: 700,
+          }}
+        />
+
+        {/* Since / Note */}
         <Typography
           variant="body2"
           color="text.secondary"
-          noWrap
-          sx={{ mt: 0.5, maxWidth: 420 }}
-          title={note || (since ? `Since ${new Date(since).toLocaleString()}` : "")}
+          mt={1}
         >
           {note
             ? note

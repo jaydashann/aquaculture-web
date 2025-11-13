@@ -3,27 +3,37 @@ import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import { mockLineData as staticData } from "../data/mockData";
 
-const LineChart = ({ data, isCustomLineColors = false, isDashboard = false }) => {
+const LineChart = ({ 
+  data, 
+  hiddenSeries = [], 
+  isCustomLineColors = false, 
+  isDashboard = false 
+}) => {
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   const chartData = (data && data.length) ? data : staticData;
+
+  // Filter OUT the hidden series
+  const visibleData = chartData.filter(series => !hiddenSeries.includes(series.id));
 
   return (
     <ResponsiveLine
-      data={chartData}
+      data={visibleData}
       theme={{
         axis: {
           domain: { line: { stroke: colors.grey[100] } },
           legend: { text: { fill: colors.grey[100] } },
-          ticks: { line: { stroke: colors.grey[100], strokeWidth: 1 }, text: { fill: colors.grey[100] } },
+          ticks: { line: { stroke: colors.grey[100], strokeWidth: 1 }, text: { fill: colors.grey[100], fontSize: 12 } },
         },
         legends: { text: { fill: colors.grey[100] } },
         tooltip: { container: { color: colors.primary[500] } },
       }}
       colors={isDashboard ? { datum: "color" } : { scheme: "nivo" }}
-      margin={{ top: 50, right: 120, bottom: 50, left: 60 }}  // legend
+      margin={{ top: 50, right: 80, bottom: 100, left: 80 }} // more bottom margin for date labels
       xScale={{ type: "time", format: "native", precision: "second", useUTC: false }}
-      xFormat="time:%H:%M:%S %p"   
+      xFormat="time:%H:%M:%S"
       yScale={{ type: "linear", min: "auto", max: "auto", stacked: true, reverse: false }}
       yFormat=" >-.2f"
       curve="catmullRom"
@@ -31,13 +41,12 @@ const LineChart = ({ data, isCustomLineColors = false, isDashboard = false }) =>
       axisRight={null}
       axisBottom={{
         orient: "bottom",
-        tickSize: 0,
-        tickPadding: 5,
-        tickRotation: 0,
-        format: "%Y-%m-%d %H:%M:%S %p",    
-        tickValues: "every 10 seconds", // fewer ticks
-        legend: isDashboard ? undefined : "date & time",
-        legendOffset: 36,
+        tickSize: 5,           // make ticks visible
+        tickPadding: 10,
+        tickRotation: -45,     // rotate for better readability
+        format: "%b %d, %I:%M %p", // nicer date/time format: "Nov 13, 10:30 AM"
+        legend: isDashboard ? undefined : "Date & Time",
+        legendOffset: 50,
         legendPosition: "middle",
       }}
       axisLeft={{
@@ -45,37 +54,18 @@ const LineChart = ({ data, isCustomLineColors = false, isDashboard = false }) =>
         tickValues: 5,
         tickSize: 3,
         tickPadding: 5,
-        legend: isDashboard ? undefined : "value",
+        legend: isDashboard ? undefined : "Value",
         legendOffset: -40,
         legendPosition: "middle",
       }}
       enableGridX={false}
       enableGridY={false}
-      pointSize={8}
+      pointSize={10}               // slightly larger points
       pointColor={{ theme: "background" }}
-      pointBorderWidth={2}
+      pointBorderWidth={3}         // thicker border for points
       pointBorderColor={{ from: "serieColor" }}
       useMesh
-      legends={[
-        {
-          anchor: "bottom-right",
-          direction: "column",
-          justify: false,
-          translateX: 100,
-          translateY: 0,
-          itemsSpacing: 0,
-          itemDirection: "left-to-right",
-          itemWidth: 80,
-          itemHeight: 20,
-          itemOpacity: 0.75,
-          symbolSize: 12,
-          symbolShape: "circle",
-          symbolBorderColor: "rgba(0, 0, 0, .5)",
-          effects: [
-            { on: "hover", style: { itemBackground: "rgba(0, 0, 0, .03)", itemOpacity: 1 } },
-          ],
-        },
-      ]}
+      lineWidth={4}                 // MAKE THE LINE THICKER
     />
   );
 };

@@ -17,7 +17,6 @@ import {
   CardContent,
   CardActions,
   useTheme,
-  Stack,
 } from "@mui/material";
 import { tokens } from "../../theme";
 import SearchIcon from "@mui/icons-material/Search";
@@ -29,8 +28,6 @@ import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import { useNavigate, useParams, Routes, Route, useLocation, Link as RouterLink } from "react-router-dom";
 import { mockNotifications as seed } from "../../data/mockNotifications";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import DoneAllIcon from "@mui/icons-material/DoneAll";
 
 // small helpers
 const SIDEBAR_W = 380;
@@ -253,6 +250,7 @@ const DetailPanel = ({ items, markRead }) => {
               startIcon={<MarkEmailUnreadIcon />}
               onClick={() => markRead(item.id, false)}
               variant="outlined"
+              color="577BC1"
             >
               Mark unread
             </Button>
@@ -265,7 +263,7 @@ const DetailPanel = ({ items, markRead }) => {
               Mark read
             </Button>
           </Box>
-          <Button size="small" onClick={() => navigate("/notifications")}>
+          <Button size="small" onClick={() => navigate("/notifications")} color="577BC1">
             Back to list
           </Button>
         </CardActions>
@@ -286,26 +284,6 @@ const NotificationsHeader = ({ onMarkAllRead }) => {
         background: theme.palette.background.default,
       })}
     >
-      <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={1}>
-        <Button
-          component={RouterLink}
-          to="/"
-          startIcon={<HomeOutlinedIcon />}
-          variant="outlined"
-          size="small"
-        >
-          Home
-        </Button>
-
-        <Button
-          onClick={onMarkAllRead}
-          startIcon={<DoneAllIcon />}
-          variant="text"
-          size="small"
-        >
-          Mark all read
-        </Button>
-      </Stack>
     </Box>
   );
 };

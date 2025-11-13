@@ -2,12 +2,8 @@ import {
   Table, TableBody, TableCell, TableContainer,
   TableHead, TableRow, Paper
 } from "@mui/material";
-import useMockSensorsStream from "../hooks/useMockSensorsStream";
-import useFirebaseSensorsStream from "../hooks/useFirebaseSensorsStream";
 
-export default function SensorsTableMock({ intervalMs = 1000, maxRows = 100 }) {
-  const rows = useMockSensorsStream({ intervalMs, maxRows }); // newest first
-
+export default function SensorsTableMock({ rows }) {
   const fmt = (n) => (Number.isFinite(n) ? n.toFixed(2) : "-");
   const fmtDate = (ms) =>
     new Date(ms).toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
@@ -19,12 +15,12 @@ export default function SensorsTableMock({ intervalMs = 1000, maxRows = 100 }) {
       <Table size="small" stickyHeader>
         <TableHead>
           <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Time</TableCell>
-            <TableCell align="right">pH Level</TableCell>
-            <TableCell align="right">Temperature</TableCell>
-            <TableCell align="right">Turbidity</TableCell>
-            <TableCell align="right">Total Dissolved Solids (TDS)</TableCell>
+            <TableCell sx={{ fontSize: "14px" }}>Date</TableCell>
+            <TableCell sx={{ fontSize: "14px" }}>Time</TableCell>
+            <TableCell align="right" sx={{ fontSize: "14px" }}>pH Level</TableCell>
+            <TableCell align="right" sx={{ fontSize: "14px" }}>Temperature</TableCell>
+            <TableCell align="right" sx={{ fontSize: "14px" }}>Turbidity</TableCell>
+            <TableCell align="right" sx={{ fontSize: "14px" }}>Total Dissolved Solids (TDS)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

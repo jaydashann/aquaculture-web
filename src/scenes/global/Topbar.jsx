@@ -31,7 +31,7 @@ const Topbar = () => {
       <Box display="flex" backgroundColor={colors.primary[400]} borderRadius="3px" />
 
       {/* icons */}
-      <Box display="flex" alignItems="center" gap={1}>
+      <Box display="flex" alignItems="center" gap={1.5}>
         {/* home button in notification screen */}
         {showHome && (
           <Tooltip title="Home">
@@ -41,14 +41,10 @@ const Topbar = () => {
               aria-label="Go to Home"
               size="large"
             >
-              <HomeOutlinedIcon />
+              <HomeOutlinedIcon sx={{ fontSize: 24 }} />
             </IconButton>
           </Tooltip>
         )}
-
-        <IconButton onClick={colorMode.toggleColorMode} aria-label="Toggle theme">
-          {theme.palette.mode === "dark" ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
-        </IconButton>
 
         <Tooltip title="Notifications">
           <IconButton
@@ -58,7 +54,7 @@ const Topbar = () => {
             size="large"
           >
             <Badge color="error" badgeContent={unread} overlap="circular">
-              <NotificationsOutlinedIcon />
+              <NotificationsOutlinedIcon sx={{ fontSize: 24 }} />
             </Badge>
           </IconButton>
         </Tooltip>
