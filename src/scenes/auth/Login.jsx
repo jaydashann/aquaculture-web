@@ -73,15 +73,18 @@ const Login = () => {
         }}
       >
         <CardContent>
-          <Typography
-            variant="h2"
-            fontWeight={800}
-            gutterBottom
-            textAlign="center"
-            sx={{ p: 2 }}
-          >
-            Welcome!
-          </Typography>
+          <Box
+            component="img"
+            src="/kelong1.png"   
+            alt="Welcome"
+            sx={{
+              width: "100%",
+              maxHeight: 180,
+              objectFit: "contain",
+              mb: 2,
+              p: 2,
+            }}
+          />
 
           <Tabs
             value={tab}

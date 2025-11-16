@@ -101,7 +101,14 @@ const Dashboard = () => {
         </Box>
 
         {/* TOGGLES */}
-        <Box display="flex" gap={2} ml={3} mt={1}>
+        <Box 
+          display="flex" 
+          gap={2} 
+          ml={3} 
+          mt={1} 
+          justifyContent="center" 
+          alignItems="center"
+        >
           <FormControlLabel
             control={
               <Checkbox

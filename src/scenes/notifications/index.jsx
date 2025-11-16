@@ -94,18 +94,13 @@ const ListPanel = ({ items, unreadCount }) => {
         overflow: "auto",
       }}
     >
-      <Box p={3} display="flex" alignItems="center" gap={1}>
-        <Badge badgeContent={unreadCount} color="error">
-          <Typography variant="h2" fontWeight={700}>Notifications</Typography>
-        </Badge>
-      </Box>
-
       <Box
         px={2}
         display="flex"
         alignItems="center"
         gap={1}
-        sx={{ background: colors.primary[400] }}
+        sx={{ background: "577BC1" }}
+        
       >
         <SearchIcon />
         <InputBase
@@ -192,7 +187,7 @@ const DetailPanel = ({ items, markRead }) => {
   if (!item) {
     return (
       <Box flex={1} display="grid" placeItems="center">
-        <Typography color="text.secondary">
+        <Typography color="577BC1">
           Select a notification to view details.
         </Typography>
       </Box>
